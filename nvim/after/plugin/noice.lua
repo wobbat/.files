@@ -21,8 +21,8 @@ require("noice").setup(
         },
         -- you can enable a preset for easier configuration
         presets = {
-            bottom_search = true,         -- use a classic bottom cmdline for search
-            long_message_to_split = true, -- long messages will be sent to a split
+            bottom_search = true,          -- use a classic bottom cmdline for search
+            long_message_to_split = false, -- long messages will be sent to a split
         },
 
     }

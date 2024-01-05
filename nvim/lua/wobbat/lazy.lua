@@ -11,11 +11,16 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local opts = {};
 -- Actually setup the plugins
 require("lazy").setup({
-    "aktersnurra/no-clown-fiesta.nvim",
-    "andrewferrier/wrapping.nvim",
+    "wobbat/dim.nvim",
     "tpope/vim-markdown",
+    {
+        'smoka7/hop.nvim',
+        version = "*",
+        opts = {},
+    },
     {
         "folke/noice.nvim",
         event = "VeryLazy",
@@ -24,17 +29,62 @@ require("lazy").setup({
         }
     },
     {
-        "lukas-reineke/headlines.nvim",
-        dependencies = "nvim-treesitter/nvim-treesitter",
-        config = true, -- or `opts = {}`
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
+    },
+    {
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
     },
     -- which key, aint nobody remember all these keybinds
-    { 'folke/which-key.nvim',             opts = {} },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        }
+    },
     'nvim-lualine/lualine.nvim',
     -- make lua_ls behave for neovim
     -- otherwise i got errors, i think
-    { "folke/neodev.nvim",                opts = {} },
-    -- LSP
+
+    {
+        "folke/neodev.nvim",
+        opts = {}
+    },
+    {
+        "folke/zen-mode.nvim",
+        opts = {
+            window = {
+                backdrop = 1,
+                width = .65,  -- width of the Zen window
+                height = .65, -- height of the Zen window
+                -- by default, no options are changed for the Zen window
+                -- uncomment any of the options below, or add other vim.wo options you want to apply
+                options = {
+                    -- signcolumn = "no", -- disable signcolumn
+                    -- number = false, -- disable number column
+                    -- relativenumber = false, -- disable relative numbers
+                    -- cursorline = false, -- disable cursorline
+                    -- cursorcolumn = false, -- disable cursor column
+                    -- foldcolumn = "0", -- disable fold column
+                    -- list = false, -- disable whitespace characters
+                },
+            },
+        }
+    },
+    -- LSP, just do not touch
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
     { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
@@ -44,9 +94,8 @@ require("lazy").setup({
     { 'Yazeed1s/minimal.nvim' },
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
-    -- { 'L3MON4D3/LuaSnip' },
-
-    -- Gotta use treesitter, syntax upgraded
+    --
+    -- syntax upgraded
     { "nvim-treesitter/nvim-treesitter",  build = ":TSUpdate" },
     -- The one and only telescope
     {
@@ -70,6 +119,7 @@ require("lazy").setup({
 
     --gitsigns
     'lewis6991/gitsigns.nvim',
+
     -- mostly using this for markdown codeblocks, but adds a buttload of other text object
     {
         "chrisgrieser/nvim-various-textobjs",
