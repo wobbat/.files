@@ -20,4 +20,4 @@ format = '$time'
 time_format = '%H:%M'
 
 [directory]
-style = 'yellow bold'
+style = 'bold'
