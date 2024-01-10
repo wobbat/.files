@@ -16,8 +16,9 @@ disabled = true
 
 [time]
 disabled = false
-format = '$time'
+format = '[$time](white bold)'
+# style = 'white bold'
 time_format = '%H:%M'
 
 [directory]
-style = 'bold'
+style = 'white bold'

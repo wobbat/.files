@@ -6,6 +6,17 @@ set fish_color_error normal
 set fish_color_command green
 set fish_greeting
 
+switch (uname)
+case Linux
+    #echo Hi Tux!
+    fish_add_path $HOME/.cargo/bin
+case Darwin
+    eval (/opt/homebrew/bin/brew shellenv)
+case FreeBSD NetBSD DragonFly
+    #echo Hi Beastie!
+case '*'
+    #echo Hi, stranger!
+end
 
 alias pkm="cd ~/_; n ."
 alias spc="aspell -no-backup -c"
