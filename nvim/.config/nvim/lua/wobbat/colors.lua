@@ -17,3 +17,6 @@ vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = '#727272', bg = '', it
 vim.api.nvim_set_hl(0, 'Normal', { fg = "#b4b4b4", bg = "#151515" })
 
 vim.api.nvim_set_hl(0, 'NoiceCmdlineIcon', { fg = "#b4b4b4", bg = "#151515" })
+vim.api.nvim_set_hl(0, 'NonText', { fg = "#151515", bg = "#151515" })
+vim.api.nvim_set_hl(0, 'Whitespace', { fg = "#151515", bg = "#151515" })
+vim.api.nvim_set_hl(0, 'SpecialKey', { fg = "#00ff00", bg = "#151515" })

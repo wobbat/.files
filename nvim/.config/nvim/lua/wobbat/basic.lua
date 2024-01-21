@@ -7,7 +7,25 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
+vim.opt.list = true
 
+vim.opt.listchars = {
+    space = "⋅",
+    eol = "↴",
+    tab = "▎_",
+    -- tab = "|_>",
+    trail = "•",
+    extends = "❯",
+    precedes = "❮",
+    nbsp = "",
+}
+vim.opt.fillchars = {
+    fold = " ",
+    foldsep = " ",
+    foldopen = "",
+    foldclose = "",
+    diff = "╱",
+}
 vim.opt.wrap = true
 
 vim.opt.swapfile = false
@@ -36,3 +54,7 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#ab8550' })
 
 vim.cmd("colorscheme dim")
 vim.o.scrolloff = 8;
+
+vim.cmd("let g:vim_markdown_frontmatter = 1")
+vim.cmd("let g:vim_markdown_toml_frontmatter = 1")
+vim.cmd("let g:vim_markdown_json_frontmatter = 1")
