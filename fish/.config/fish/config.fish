@@ -12,6 +12,7 @@ case Linux
     fish_add_path $HOME/.cargo/bin
 case Darwin
     eval (/opt/homebrew/bin/brew shellenv)
+    fish_add_path $HOME/go/bin
 case FreeBSD NetBSD DragonFly
     #echo Hi Beastie!
 case '*'
