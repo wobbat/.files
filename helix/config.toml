@@ -1,0 +1,36 @@
+theme = "rose_pine_dawn"
+
+[editor]
+true-color = true
+color-modes = true
+line-number = "relative"
+bufferline = "multiple"
+
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name"]
+right = [ "position", "file-type"]
+separator = "│"
+mode.normal = "NOR"
+mode.insert = "INS"
+mode.select = "SEL"
+
+[editor.lsp]
+display-messages = true
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊"
+skip-levels = 1
+
+[keys.select]
+esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
+[keys.insert]
+esc = ["collapse_selection", "normal_mode" ]
+[keys.normal]
+esc = ["collapse_selection" ,"normal_mode" ]
+0 =  "expand_selection" 
+## Key remaps
+[keys.normal.space]
+b = { q = ":buffer-close", b = "buffer_picker", n = ":buffer-next" }
+m = { c = ["expand_selection", "yank_to_clipboard"] }
