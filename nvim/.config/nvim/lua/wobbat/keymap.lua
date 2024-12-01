@@ -15,3 +15,10 @@ vim.api.nvim_set_keymap('n', '<leader>dn', '<cmd>DailyNote<CR>', { noremap = tru
 
 vim.keymap.set("n", "<leader>id", "<cmd> InsertTime<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>ct", "<cmd> ColorizerToggle <CR>", { noremap = true })
+
+
+-- Remap Ctrl+n to Ctrl+j
+vim.api.nvim_set_keymap('n', '<C-j>', '<C-n>', { noremap = true, silent = true })
+
+-- Remap Ctrl+p to Ctrl+k
+vim.api.nvim_set_keymap('n', '<C-k>', '<C-p>', { noremap = true, silent = true })

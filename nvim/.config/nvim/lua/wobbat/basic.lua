@@ -10,8 +10,8 @@ vim.opt.smartindent = true
 vim.opt.list = true
 
 vim.opt.listchars = {
-    space = "⋅",
-    eol = "↴",
+    space = " ",
+    eol = " ",
     tab = "▎_",
     -- tab = "|_>",
     trail = "•",
@@ -58,3 +58,6 @@ vim.o.scrolloff = 8;
 vim.cmd("let g:vim_markdown_frontmatter = 1")
 vim.cmd("let g:vim_markdown_toml_frontmatter = 1")
 vim.cmd("let g:vim_markdown_json_frontmatter = 1")
+
+vim.opt.acd = false
+vim.o.guicursor = "n:block,i:block,r:block,o:block"
