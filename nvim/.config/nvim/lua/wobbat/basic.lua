@@ -59,5 +59,5 @@ vim.cmd("let g:vim_markdown_frontmatter = 1")
 vim.cmd("let g:vim_markdown_toml_frontmatter = 1")
 vim.cmd("let g:vim_markdown_json_frontmatter = 1")
 
-vim.opt.acd = false
 vim.o.guicursor = "n:block,i:block,r:block,o:block"
+vim.o.autochdir = false
