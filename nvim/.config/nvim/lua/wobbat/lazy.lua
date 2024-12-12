@@ -11,12 +11,32 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 local opts = {};
 -- Actually setup the plugins
 require("lazy").setup({
     "wobbat/dim.nvim",
+    "slugbyte/lackluster.nvim",
     "tpope/vim-markdown",
+    {
+        'projekt0n/github-nvim-theme',
+        name = 'github-theme',
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other start plugins
+        config = function()
+            require('github-theme').setup({
+                options = {
+                    transparent = true,
+                }
+            })
+        end,
+    },
     'godlygeek/tabular',
+    {
+        "Mofiqul/adwaita.nvim",
+        lazy = false,
+        priority = 1000,
+    },
     {
         'smoka7/hop.nvim',
         version = "*",
@@ -32,6 +52,23 @@ require("lazy").setup({
         }
     },
     {
+        'nvimdev/dashboard-nvim',
+        event = 'VimEnter',
+        config = function()
+            require('dashboard').setup {
+                theme = 'hyper',
+                config = {
+                    week_header = {
+                        enable = true,
+                    },
+                    shortcut = {
+                    },
+                },
+            }
+        end,
+        dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+    },
+    {
         "folke/noice.nvim",
         event = "VeryLazy",
         dependencies = {
@@ -41,10 +78,56 @@ require("lazy").setup({
 
     {
         "folke/trouble.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        opts = {
-            -- refer to the configuration section below
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>xX",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+            {
+                "<leader>cs",
+                "<cmd>Trouble symbols toggle focus=false<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>cl",
+                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+            {
+                "<leader>xL",
+                "<cmd>Trouble loclist toggle<cr>",
+                desc = "Location List (Trouble)",
+            },
+            {
+                "<leader>xQ",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
         },
+    },
+    {
+        "kevinhwang91/nvim-bqf",
+        opts = {
+            preview = { winblend = 0 },
+        },
+    },
+    {
+        "chentoast/marks.nvim",
+        event = "VeryLazy",
+        opts = {},
+    },
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" }
     },
     {
         "nvim-telescope/telescope-file-browser.nvim",
@@ -55,19 +138,19 @@ require("lazy").setup({
         opts = {},
     },
     -- which key, aint nobody remember all these keybinds
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        init = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-        end,
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        }
-    },
+    --    {
+    --        "folke/which-key.nvim",
+    --        event = "VeryLazy",
+    --        init = function()
+    --            vim.o.timeout = true
+    --           vim.o.timeoutlen = 100
+    --       end,
+    --        opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+    --        }
+    --    },
     'nvim-lualine/lualine.nvim',
     -- make lua_ls behave for neovim
     -- otherwise i got errors, i think
@@ -113,6 +196,10 @@ require("lazy").setup({
     { "nvim-treesitter/nvim-treesitter",  build = ":TSUpdate" },
     -- The one and only telescope
     {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+    },
+    {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.5',
         dependencies = { 'nvim-lua/plenary.nvim' }
@@ -138,7 +225,7 @@ require("lazy").setup({
     {
         "chrisgrieser/nvim-various-textobjs",
         lazy = false,
-        opts = { useDefaultKeymaps = true },
+        --opts = { useDefaultKeymaps = true },
     },
 
     -- better undo

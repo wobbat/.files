@@ -22,3 +22,6 @@ vim.api.nvim_set_keymap('n', '<C-j>', '<C-n>', { noremap = true, silent = true }
 
 -- Remap Ctrl+p to Ctrl+k
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-p>', { noremap = true, silent = true })
+
+-- Show quick fix
+vim.api.nvim_set_keymap('n', '<Leader>qf', ':copen<CR>', { noremap = true, silent = true })

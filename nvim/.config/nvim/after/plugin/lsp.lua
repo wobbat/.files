@@ -5,7 +5,7 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
     -- Replace the language servers listed here
     -- with the ones you want to install
-    ensure_installed = { 'gopls', 'lua_ls', 'rust_analyzer' },
+    ensure_installed = { 'bashls', 'gopls', 'lua_ls', 'rust_analyzer' },
     handlers = {
         lsp.default_setup,
     },
@@ -73,6 +73,21 @@ lsp.on_attach(function(client, bufnr)
 
     lsp.buffer_autoformat()
 end)
+
+-- Manually configure SourceKit-LSP
+require('lspconfig').sourcekit.setup({
+    cmd = { 'sourcekit-lsp' },                                                  -- Ensure this command is available in your PATH
+    filetypes = { 'swift', 'objective-c', 'objective-cpp' },                    -- Languages SourceKit supports
+    root_dir = require('lspconfig.util').root_pattern('Package.swift', '.git'), -- Project root patterns
+    on_attach = function(client, bufnr)
+        local opts = { buffer = bufnr, remap = false }
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+    end,
+    capabilities = require('cmp_nvim_lsp').default_capabilities(), -- Enable autocompletion
+})
 
 lsp.setup()
 

@@ -9,11 +9,18 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.list = true
 
+
+-- Set signcolumn to auto after opening a window
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    callback = function()
+        vim.wo.signcolumn = 'auto' -- Set signcolumn to 'auto'
+    end,
+})
+
 vim.opt.listchars = {
     space = " ",
     eol = " ",
-    tab = "▎_",
-    -- tab = "|_>",
+    tab = "|·",
     trail = "•",
     extends = "❯",
     precedes = "❮",
@@ -52,7 +59,9 @@ vim.opt.spelllang = 'en_us,nl'
 vim.opt.spell = true
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#ab8550' })
 
-vim.cmd("colorscheme dim")
+vim.g.adwaita_darker = true -- for darker version
+vim.cmd('colorscheme dim')
+
 vim.o.scrolloff = 8;
 
 vim.cmd("let g:vim_markdown_frontmatter = 1")
@@ -61,3 +70,6 @@ vim.cmd("let g:vim_markdown_json_frontmatter = 1")
 
 vim.o.guicursor = "n:block,i:block,r:block,o:block"
 vim.o.autochdir = false
+
+-- kinda done with the deprecated warning, this should not break anything, I think
+vim.tbl_islist = vim.islist

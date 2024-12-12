@@ -31,6 +31,7 @@ alias kssh="kitten ssh"
 # alias dailynote="""date '+%d-%m-%Y.md' | awk '{print "~/_/log/daily/"$1}"""
 alias timenow="date '+%H:%M'"
 alias dailynote="today_date | daily_note"
+alias backlight="sudo light -s sysfs/backlight/intel_backlight -S"
 
 function today_date
     date '+%d-%m-%Y.md' 

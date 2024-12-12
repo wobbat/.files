@@ -14,9 +14,15 @@ vim.api.nvim_set_hl(0, 'markdownH4', { fg = '#6d8c82', bg = '', italic = false }
 vim.api.nvim_set_hl(0, 'markdownH5', { fg = '#657989', bg = '', italic = false })
 vim.api.nvim_set_hl(0, 'markdownH6', { fg = '#885d7f', bg = '', italic = false })
 vim.api.nvim_set_hl(0, 'markdownHeadingDelimiter', { fg = '#727272', bg = '', italic = false })
-vim.api.nvim_set_hl(0, 'Normal', { fg = "#b4b4b4", bg = "#151515" })
+--vim.api.nvim_set_hl(0, 'Normal', { fg = "#b4b4b4", bg = "#151515" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "#000000" })
 
-vim.api.nvim_set_hl(0, 'NoiceCmdlineIcon', { fg = "#b4b4b4", bg = "#151515" })
-vim.api.nvim_set_hl(0, 'NonText', { fg = "#b4b4b4", bg = "#151515" })
-vim.api.nvim_set_hl(0, 'Whitespace', { fg = "#b4b4b4", bg = "#151515" })
-vim.api.nvim_set_hl(0, 'SpecialKey', { fg = "#00ff00", bg = "#151515" })
+
+--vim.api.nvim_set_hl(0, 'NoiceCmdlineIcon', { fg = "#b4b4b4", bg = "#151515" })
+--vim.api.nvim_set_hl(0, 'NonText', { fg = "#b4b4b4", bg = "#151515" })
+--vim.api.nvim_set_hl(0, 'Whitespace', { fg = "#b4b4b4", bg = "#151515" })
+--vim.api.nvim_set_hl(0, 'SpecialKey', { fg = "#00ff00", bg = "#151515" })
+
+-- Set a solid black background for QuickFixLine and NvimBQFQuickfix highlight groups (terminal only)
+vim.api.nvim_set_hl(0, 'BqfPreviewFloat', { ctermbg = 'black' })
+vim.api.nvim_set_hl(0, 'NvimBQFQuickfix', { ctermbg = 'black' })
