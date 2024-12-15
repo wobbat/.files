@@ -5,6 +5,8 @@ end
 set fish_color_error normal
 set fish_color_command green
 set fish_greeting
+set GOPATH $HOME/.go
+
 
 switch (uname)
 case Linux
@@ -41,6 +43,17 @@ function daily_note
     read datestring
     echo "~/_log/daily/"$datestring
 end
+
+function nv
+    if test (count $argv) -eq 0
+        # No arguments, open the current directory (.) in Neovim
+        nvim .
+    else
+        # Arguments provided, open the given file or directory in Neovim
+        nvim $argv
+    end
+end
+
 
 
 #ls replacement with exa
