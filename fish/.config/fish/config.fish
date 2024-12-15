@@ -7,6 +7,7 @@ set fish_color_command green
 set fish_greeting
 set GOPATH $HOME/.go
 
+set -Ux EDITOR nvim
 
 switch (uname)
 case Linux

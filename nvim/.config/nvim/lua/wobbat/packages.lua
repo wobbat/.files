@@ -21,8 +21,7 @@ require("lazy").setup({
     {
         'projekt0n/github-nvim-theme',
         name = 'github-theme',
-        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other start plugins
+        lazy = false,
         config = function()
             require('github-theme').setup({
                 options = {
@@ -94,7 +93,8 @@ require("lazy").setup({
     },
     {
         "nvim-telescope/telescope-file-browser.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+        dependencies = { "nvim-telescope/telescope.nvim",
+            "nvim-lua/plenary.nvim" }
     },
     {
         'norcalli/nvim-colorizer.lua',
@@ -125,7 +125,6 @@ require("lazy").setup({
                 width = .65,  -- width of the Zen window
                 height = .99, -- height of the Zen window
                 -- by default, no options are changed for the Zen window
-                -- uncomment any of the options below, or add other vim.wo options you want to apply
                 options = {
                     signcolumn = "yes", -- disable signcolumn
                     -- number = false, -- disable number column
@@ -152,7 +151,8 @@ require("lazy").setup({
     { "nvim-treesitter/nvim-treesitter",  build = ":TSUpdate" },
     {
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+        build = [[cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
+        && cmake --build build --config Release]]
     },
     {
         'nvim-telescope/telescope.nvim',
@@ -171,10 +171,15 @@ require("lazy").setup({
         config = true
     },
     'lewis6991/gitsigns.nvim',
-    -- mostly using this for markdown codeblocks, but adds a buttload of other text object
+    -- mostly using this for markdown codeblocks,
+    -- but adds a buttload of other text object
     {
         "chrisgrieser/nvim-various-textobjs",
         lazy = false,
+    },
+    {
+        "m4xshen/smartcolumn.nvim",
+        opts = {}
     },
     -- better undo
     {

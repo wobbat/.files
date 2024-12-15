@@ -16,7 +16,6 @@ vim.api.nvim_set_keymap('n', '<leader>dn', '<cmd>DailyNote<CR>', { noremap = tru
 
 -- Show quick fix
 vim.api.nvim_set_keymap('n', '<Leader>qf', ':copen<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>qfc', ':cclose<CR>', { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>tt", function()
     vim.cmd.new()
@@ -28,3 +27,8 @@ end)
 
 vim.api.nvim_set_keymap('n', '<leader>hl', '<cmd>HopLine<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>hw', '<cmd>HopWord<CR>', { noremap = true, silent = true })
+
+
+-- windows movement?
+vim.api.nvim_set_keymap('n', '<leader>wj', '<C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>wk', '<C-w>k', { noremap = true, silent = true })
