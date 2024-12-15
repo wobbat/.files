@@ -15,13 +15,10 @@ case Linux
 case Darwin
     eval (/opt/homebrew/bin/brew shellenv)
     fish_add_path $HOME/go/bin
-case FreeBSD NetBSD DragonFly
-    #echo Hi Beastie!
 case '*'
     #echo Hi, stranger!
 end
 
-alias pkm="cd ~/_; n ."
 alias spc="aspell -no-backup -c"
 alias cl="clear"
 alias gofmt="goimports"
@@ -29,20 +26,7 @@ alias gofmt="goimports"
 #alias 3tx='exiftool -Model="RICOH GR IIIx" -UniqueCameraModel="RICOH GR IIIx" -T -ext dng .'
 alias vim="nvim"
 alias n="nvim"
-alias kssh="kitten ssh"
-# alias dailynote="""date '+%d-%m-%Y.md' | awk '{print "~/_/log/daily/"$1}"""
-alias timenow="date '+%H:%M'"
-alias dailynote="today_date | daily_note"
 alias backlight="sudo light -s sysfs/backlight/intel_backlight -S"
-
-function today_date
-    date '+%d-%m-%Y.md' 
-end
-
-function daily_note
-    read datestring
-    echo "~/_log/daily/"$datestring
-end
 
 function nv
     if test (count $argv) -eq 0
@@ -65,7 +49,6 @@ alias ls="eza --group-directories-first"
 alias tm="tmux new -As0"
 alias tmc="tmux new -Ascode"
 
-alias zij="zellij"
-
 starship init fish | source
 
+fish_vi_key_bindings
