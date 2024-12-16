@@ -51,5 +51,6 @@ alias tm="tmux new -As0"
 alias tmc="tmux new -Ascode"
 
 starship init fish | source
-
+zoxide init fish | source
 fish_vi_key_bindings
+

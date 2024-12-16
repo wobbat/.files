@@ -16,8 +16,15 @@ local opts = {};
 -- Actually setup the plugins
 require("lazy").setup({
     "wobbat/dim.nvim",
-    "slugbyte/lackluster.nvim",
     "tpope/vim-markdown",
+    "slugbyte/lackluster.nvim",
+    {
+        "henriklovhaug/Preview.nvim",
+        cmd = { "Preview" },
+        config = function()
+            require("preview").setup()
+        end,
+    },
     {
         'projekt0n/github-nvim-theme',
         name = 'github-theme',
