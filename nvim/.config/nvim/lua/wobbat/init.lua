@@ -7,3 +7,4 @@ require("wobbat.commands")
 require("wobbat.netrw")
 require("wobbat.colors")
 require("wobbat.whopy")
+
