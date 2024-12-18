@@ -4,6 +4,9 @@ local wezterm = require 'wezterm'
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+config.enable_wayland = false
+config.warn_about_missing_glyphs = false
+
 config.font = wezterm.font('JetBrains Mono NF', { weight = 'Bold' })
 config.font_size = 16.0
 config.tab_bar_at_bottom = false

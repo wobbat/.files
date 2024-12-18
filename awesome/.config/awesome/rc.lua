@@ -28,6 +28,22 @@ if awesome.startup_errors then
         text = awesome.startup_errors
     })
 end
+-- Battery widget using cat
+local battery_widget = wibox.widget.textbox()
+
+
+-- Function to update battery info
+local function update_battery()
+    -- Path to battery info (adjust if necessary)
+    awful.spawn.easy_async_with_shell("cat /sys/class/power_supply/BAT0/capacity", function(stdout)
+        battery_widget.text = stdout:match("^%s*(.-)%s*$") .. "%" -- Trim whitespace and append "%"
+    end)
+end
+
+-- Update battery every 60 seconds
+gears.timer.start_new(60, update_battery)
+
+update_battery()
 
 -- Handle runtime errors after startup
 do
@@ -51,6 +67,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("~/.config/awesome/theme.lua")
 
+battery_widget.font = beautiful.font
 
 -- This is used later as the default terminal and editor to run.
 terminal = "wezterm"
@@ -156,6 +173,12 @@ local tasklist_buttons = gears.table.join(
         awful.client.focus.byidx(-1)
     end))
 
+
+local separator_widget = wibox.widget.textbox(" |")
+
+-- Set the foreground color of the widget
+separator_widget.fg = "#FF0000"
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
 
@@ -203,6 +226,8 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
+            battery_widget,
+            separator_widget,
             mytextclock,
             --s.mylayoutbox,
         },
