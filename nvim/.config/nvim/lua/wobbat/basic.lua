@@ -9,6 +9,8 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.list = true
 
+ vim.opt.cursorline = false
+
 vim.opt.listchars = {
     space = " ",
     eol = " ",

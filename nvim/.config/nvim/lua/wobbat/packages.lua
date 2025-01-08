@@ -11,20 +11,28 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
 local opts = {};
 -- Actually setup the plugins
 require("lazy").setup({
     "wobbat/dim.nvim",
     "tpope/vim-markdown",
     "slugbyte/lackluster.nvim",
-    {
-        "henriklovhaug/Preview.nvim",
-        cmd = { "Preview" },
-        config = function()
-            require("preview").setup()
-        end,
+    { 'echasnovski/mini.nvim', version = false },
+   {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
     },
+    {
+  "max397574/better-escape.nvim",
+  config = function()
+    require("better_escape").setup()
+  end,
+},
     {
         'saghen/blink.cmp',
         lazy = false, -- lazy loading handled internally
@@ -222,7 +230,7 @@ require("lazy").setup({
     {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = [[cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
-        && cmake --build build --config Release]]
+        and cmake --build build --config Release]]
     },
     {
         'nvim-telescope/telescope.nvim',

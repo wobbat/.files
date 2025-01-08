@@ -233,7 +233,7 @@ awful.screen.connect_for_each_screen(function(s)
         wibox.widget.textbox(""),
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
+            -- wibox.widget.systray(),
            -- battery_widget,
             bat_widget,
             separator_widget,
@@ -275,8 +275,8 @@ globalkeys = gears.table.join(
         end,
         { description = "focus previous by index", group = "client" }
     ),
-    awful.key({ modkey, }, "w", function() mymainmenu:show() end,
-        { description = "show main menu", group = "awesome" }),
+    --awful.key({ modkey, }, "w", function() mymainmenu:show() end,
+     --   { description = "show main menu", group = "awesome" }),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift" }, "j", function() awful.client.swap.byidx(1) end,

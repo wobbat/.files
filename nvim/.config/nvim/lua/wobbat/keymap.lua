@@ -7,6 +7,7 @@ vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
 -- vim.keymap.set("n", "<leader>ftb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true })
 -- Better redo
 vim.keymap.set("n", "U", "<C-r>")
+vim.keymap.set("n", "U", "<C-r>")
 
 -- LEADER stuff
 vim.g.mapleader = " "
@@ -32,3 +33,12 @@ vim.api.nvim_set_keymap('n', '<leader>hw', '<cmd>HopWord<CR>', { noremap = true,
 -- windows movement?
 vim.api.nvim_set_keymap('n', '<leader>wj', '<C-w>j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wk', '<C-w>k', { noremap = true, silent = true })
+
+
+
+-- Remap Tab to Escape in Visual mode
+vim.api.nvim_set_keymap('v', '<Tab>', '<Esc>', { noremap = true, silent = true })
+
+-- Remap Tab to Escape in Insert mode
+vim.api.nvim_set_keymap('i', '<Tab>', '<Esc>', { noremap = true, silent = true })
+
