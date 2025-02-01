@@ -2,6 +2,8 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = { 'bashls', 'gopls', 'lua_ls', 'rust_analyzer' },
     handlers = {
+
+      on_attach = on_attach,  -- Apply the global on_attach function
         lua_ls = function()
             require('lspconfig').lua_ls.setup({
                 single_file_support = false,
@@ -19,6 +21,29 @@ require('mason-lspconfig').setup({
         end,
     }
 })
+
+-- Define the 'on_attach' function
+local function on_attach(client, bufnr)
+  -- Set up keybindings for LSP features
+  enable_format_on_save(client, bufnr)
+  local opts = { noremap=true, silent=true }
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- You can add more LSP-related setup here as needed
+end
+
+-- Function to enable format on save
+local function enable_format_on_save(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr })
+            end,
+        })
+    end
+end
 
 --local cmp = require('cmp')
 --local cmp_select = { behavior = cmp.SelectBehavior.Select }

@@ -17,22 +17,22 @@ require("lazy").setup({
     "wobbat/dim.nvim",
     "tpope/vim-markdown",
     "slugbyte/lackluster.nvim",
-    { 'echasnovski/mini.nvim', version = false },
-   {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {},
+    { 'echasnovski/mini.nvim',            version = false },
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = {},
     },
     {
-  "max397574/better-escape.nvim",
-  config = function()
-    require("better_escape").setup()
-  end,
-},
+        "max397574/better-escape.nvim",
+        config = function()
+            require("better_escape").setup()
+        end,
+    },
     {
         'saghen/blink.cmp',
         lazy = false, -- lazy loading handled internally
@@ -41,7 +41,7 @@ require("lazy").setup({
 
         -- use a release tag to download pre-built binaries
         version = 'v0.*',
-               ---@module 'blink.cmp'
+        ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
             -- 'default' for mappings similar to built-in completion
@@ -69,13 +69,13 @@ require("lazy").setup({
         opts_extend = { "sources.default" }
     },
     {
-    "atiladefreitas/dooing",
-    config = function()
-        require("dooing").setup({
-            -- your custom config here (optional)
-        })
-    end,
-},
+        "atiladefreitas/dooing",
+        config = function()
+            require("dooing").setup({
+                -- your custom config here (optional)
+            })
+        end,
+    },
     {
         'projekt0n/github-nvim-theme',
         name = 'github-theme',
@@ -198,27 +198,10 @@ require("lazy").setup({
     -- LSP, just do not touch
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
+
     {
         'neovim/nvim-lspconfig',
         dependencies = { 'saghen/blink.cmp' },
-
-        config = function(_, opts)
-            local lspconfig = require('lspconfig')
-            for server, config in pairs(opts.servers) do
-              -- passing config.capabilities to blink.cmp merges with the capabilities in your
-              -- `opts[server].capabilities, if you've defined it
-              config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-              lspconfig[server].setup(config)
-            end
-          end,
-
-        -- example using `opts` for defining servers
-        opts = {
-            servers = {
-                lua_ls = {},
-                gopls = {}
-            }
-        }
     },
     { 'github/copilot.vim' },
     { 'ellisonleao/gruvbox.nvim' },

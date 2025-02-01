@@ -34,11 +34,44 @@ vim.api.nvim_set_keymap('n', '<leader>hw', '<cmd>HopWord<CR>', { noremap = true,
 vim.api.nvim_set_keymap('n', '<leader>wj', '<C-w>j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>wk', '<C-w>k', { noremap = true, silent = true })
 
+opts = {}
+-- moving around stuff
+vim.api.nvim_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+-- Set space as the leader key
+vim.g.mapleader = ' '  -- space bar
+
+-- Now <Leader>h and <Leader>l will work as desired
+vim.api.nvim_set_keymap('n', '<Leader>hh', ':normal! <C-o><CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>ll', ':normal! <C-i><CR>', { noremap = true, silent = true })
 
 
--- Remap Tab to Escape in Visual mode
-vim.api.nvim_set_keymap('v', '<Tab>', '<Esc>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>mts", function()
+    MiniTrailspace.trim()
+end)
 
--- Remap Tab to Escape in Insert mode
-vim.api.nvim_set_keymap('i', '<Tab>', '<Esc>', { noremap = true, silent = true })
+function toggle_checkbox()
+  -- Get the current line
+  local line = vim.api.nvim_get_current_line()
 
+  -- Check for "[ ]" and replace it with "[-]"
+  if line:find("%[ %]") then
+    line = line:gsub("%[ %]", "[-]", 1)
+  -- Check for "[-]" and replace it with "[x]"
+  elseif line:find("%[%-%]") then
+    line = line:gsub("%[%-%]", "[x]", 1)
+  -- Check for "[x]" and replace it with "[ ]"
+  elseif line:find("%[x%]") then
+    line = line:gsub("%[x%]", "[ ]", 1)
+  else
+    -- If none are found, insert "[ ]" at the beginning of the line
+    line = "- [ ] " .. line
+  end
+
+  -- Set the updated line back
+  vim.api.nvim_set_current_line(line)
+end
+
+-- Bind the function to a key (optional)
+vim.api.nvim_set_keymap("n", "<leader>cb", ":lua toggle_checkbox()<CR>", { noremap = true, silent = true })

@@ -50,6 +50,8 @@ local colors = {
     accent_red = "#201919",       -- Accent color for red
 }
 
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+
 -- Set config.colors directly
 config.colors = {
     -- Basic Colors

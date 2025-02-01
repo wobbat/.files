@@ -26,6 +26,23 @@ require('render-markdown').setup({
         right_pad = 0,
         highlight = 'RenderMarkdownBullet',
     },
+    enabled = true,
+      checkbox = {
+        position = 'inline',
+        unchecked = {
+            icon = ' ',
+            highlight = 'RenderMarkdownUnchecked',
+            scope_highlight = nil,
+        },
+        checked = {
+            icon = ' ',
+            highlight = 'RenderMarkdownChecked',
+            scope_highlight = '@markup.strikethrough',
+        },
+           custom = {
+            todo = { raw = '[-]', rendered = ' ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
+        },
+    },
     heading = {
         enabled = true,
         position = 'inline',

@@ -39,8 +39,6 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 
-
-
 local builtin = require('telescope.builtin')
 local action_state = require('telescope.actions.state')
 
