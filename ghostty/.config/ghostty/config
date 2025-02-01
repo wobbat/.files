@@ -1,0 +1,12 @@
+window-decoration = false
+
+font-size = 17
+
+font-family =  "UbuntuMono Nerd Font Bold"
+font-style = "Bold"
+
+theme = "dim"
+
+window-padding-x = 0
+
+gtk-adwaita = false
