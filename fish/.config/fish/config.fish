@@ -11,7 +11,6 @@ set -Ux EDITOR nvim
 
 switch (uname)
 case Linux
-    #echo Hi Tux!
     fish_add_path $HOME/.cargo/bin
     fish_add_path $HOME/go/bin
 case Darwin
@@ -88,7 +87,7 @@ starship init fish | source
 zoxide init fish | source
 fish_vi_key_bindings
 
-if test (basename (tty)) = "tty1"
+if test (basename (tty)) = "tty2"
     if not pgrep Xorg > /dev/null
         echo "Starting X server on TTY1..."
         exec startx
