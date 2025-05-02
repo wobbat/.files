@@ -55,7 +55,6 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod], "b", lazy.hide_show_bar(), desc="Hides the bar"),
-    Key([mod], "space", lazy.spawn("rofi -show run"), desc="show the launcher"),
     Key([mod], "x", lazy.spawn("rofi -show run"), desc="show the launcher"),
 ]
 

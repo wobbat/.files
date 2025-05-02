@@ -4,16 +4,17 @@ local wezterm = require 'wezterm'
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
-config.enable_wayland = false
 config.warn_about_missing_glyphs = false
 
-config.font = wezterm.font('JetBrains Mono NF', { weight = 'Bold' })
+config.font = wezterm.font('JetBrains Mono', { weight = 'Bold' })
 config.font_size = 16.0
-config.tab_bar_at_bottom = false
+config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
-config.enable_tab_bar = false
+config.enable_tab_bar = true
 config.default_cursor_style = 'BlinkingBlock'
-config.animation_fps = 1
+config.animation_fps = 30
+config.hide_tab_bar_if_only_one_tab = true
+config.show_new_tab_button_in_tab_bar = false
 
 -- Define colors
 local colors = {
@@ -52,6 +53,135 @@ local colors = {
 
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 
+config.keys = {
+    {
+        key = "a",
+        mods = 'ALT',
+        action = wezterm.action.ActivateKeyTable {
+            name = 'my_prefix',
+            one_shot = true,
+            timeout_milliseconds = 100000,
+        },
+    },
+    {
+        key = "j",
+        mods = "CTRL",
+        action = wezterm.action.ActivateTabRelative(1),
+    },
+    {
+        key = "k",
+        mods = "CTRL",
+        action = wezterm.action.ActivateTabRelative(-1),
+    },
+}
+
+
+-- Define key table actions
+config.key_tables = {
+    my_prefix = {
+        {
+            key = 't',
+            action = wezterm.action.SpawnTab 'DefaultDomain',
+        },
+        {
+            key = 'r',
+            action = wezterm.action_callback(function(window, pane)
+                window:perform_action(
+                    wezterm.action.PromptInputLine {
+                        description = 'Rename tab',
+                        action = wezterm.action_callback(function(window, _, line)
+                            if line then
+                                window:active_tab():set_title(line)
+                            end
+                        end),
+                    },
+                    pane
+                )
+            end),
+        },
+        {
+            key = 's',
+            action = wezterm.action.ShowTabNavigator,
+        },
+
+        { key = 'q', action = wezterm.action.CloseCurrentTab { confirm = false } },
+        { key = '1', action = wezterm.action.ActivateTab(0) },
+        { key = '2', action = wezterm.action.ActivateTab(1) },
+        { key = '3', action = wezterm.action.ActivateTab(2) },
+        { key = '4', action = wezterm.action.ActivateTab(3) },
+        { key = '5', action = wezterm.action.ActivateTab(4) },
+        { key = '6', action = wezterm.action.ActivateTab(5) },
+        { key = '7', action = wezterm.action.ActivateTab(6) },
+        { key = '8', action = wezterm.action.ActivateTab(7) },
+        { key = '9', action = wezterm.action.ActivateTab(8) },
+    },
+}
+
+
+-- The filled in variant of the < symbol
+local SOLID_LEFT_ARROW = "█"
+
+-- The filled in variant of the > symbol
+local SOLID_RIGHT_ARROW = "█"
+
+-- This function returns the suggested title for a tab.
+-- It prefers the title that was set via `tab:set_title()`
+-- or `wezterm cli set-tab-title`, but falls back to the
+-- title of the active pane in that tab.
+function tab_title(tab_info)
+    local title = tab_info.tab_title
+    -- if the tab title is explicitly set, take that
+    if title and #title > 0 then
+        return title
+    end
+
+    local process_name = tab_info.active_pane.foreground_process_name or ''
+    local short_process = process_name:match("([^/\\]+)$") or process_name
+    return short_process
+    -- Otherwise, use the title from the active pane
+    -- in that tab
+    --return tab_info.active_pane.title
+end
+
+wezterm.on(
+    'format-tab-title',
+    function(tab, tabs, panes, config, hover, max_width)
+        local edge_background = '#000000'
+        local background = '#000000'
+        local foreground = '#808080'
+
+        if tab.is_active then
+            background = '#000000'
+            foreground = '#896a40'
+        elseif hover then
+            background = '#000000'
+            foreground = '#909090'
+        end
+
+        local edge_foreground = background
+
+        local title = tab_title(tab)
+        title = string.format('%d: %s', tab.tab_index + 1, title)
+
+        -- ensure that the titles fit in the available space,
+        -- and that we have room for the edges.
+        title = wezterm.truncate_right(title, max_width - 2)
+
+        return {
+            { Background = { Color = edge_background } },
+            { Foreground = { Color = edge_foreground } },
+            { Text = SOLID_LEFT_ARROW },
+            { Background = { Color = background } },
+            { Foreground = { Color = foreground } },
+            { Text = title },
+            { Background = { Color = edge_background } },
+            { Foreground = { Color = edge_foreground } },
+            { Text = SOLID_RIGHT_ARROW },
+        }
+    end
+)
+
+
 -- Set config.colors directly
 config.colors = {
     -- Basic Colors
@@ -61,7 +191,11 @@ config.colors = {
     cursor_bg = colors.fg,
     cursor_border = colors.gray,
 
-
+    tab_bar = {
+        -- The color of the strip that goes along the top of the window
+        -- (does not apply when fancy tab bar is in use)
+        background = '#000000',
+    },
     selection_bg = colors.red,
     selection_fg = colors.alt_bg,
 
@@ -90,6 +224,5 @@ config.colors = {
     },
 
 }
-
 
 return config
