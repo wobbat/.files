@@ -68,32 +68,7 @@ require("lazy").setup({
         -- without having to redefine it
         opts_extend = { "sources.default" }
     },
-    {
-        "atiladefreitas/dooing",
-        config = function()
-            require("dooing").setup({
-                -- your custom config here (optional)
-            })
-        end,
-    },
-    {
-        'projekt0n/github-nvim-theme',
-        name = 'github-theme',
-        lazy = false,
-        config = function()
-            require('github-theme').setup({
-                options = {
-                    transparent = true,
-                }
-            })
-        end,
-    },
     'godlygeek/tabular',
-    {
-        "Mofiqul/adwaita.nvim",
-        lazy = false,
-        priority = 1000,
-    },
     {
         'smoka7/hop.nvim',
         version = "*",
@@ -209,12 +184,8 @@ require("lazy").setup({
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'ggandor/leap.nvim' },
     { 'hrsh7th/nvim-cmp' },
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = [[cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
-        and cmake --build build --config Release]]
-    },
+    { "nvim-treesitter/nvim-treesitter",          build = ":TSUpdate" },
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.5',

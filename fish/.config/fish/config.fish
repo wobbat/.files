@@ -6,6 +6,9 @@ set fish_color_error normal
 set fish_color_command green
 set fish_greeting
 set GOPATH $HOME/go
+set MOZ_ENABLE_WAYLAND 1
+set OZONE_PLATFORM wayland
+
 
 set -Ux EDITOR nvim
 

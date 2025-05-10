@@ -7,7 +7,9 @@ local config = wezterm.config_builder()
 config.warn_about_missing_glyphs = false
 
 config.font = wezterm.font('JetBrains Mono', { weight = 'Bold' })
-config.font_size = 16.0
+config.font = wezterm.font('VictorMono NF', { weight = 'Bold' })
+config.font = wezterm.font('Berkeley Mono', { weight = 'Bold' })
+config.font_size = 15.0
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.enable_tab_bar = true
@@ -15,6 +17,7 @@ config.default_cursor_style = 'BlinkingBlock'
 config.animation_fps = 30
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
+config.enable_wayland = true
 
 -- Define colors
 local colors = {
@@ -52,6 +55,7 @@ local colors = {
 }
 
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+
 
 config.keys = {
     {
@@ -104,6 +108,7 @@ config.key_tables = {
             action = wezterm.action.ShowTabNavigator,
         },
 
+        { key = 'b', action = wezterm.action.EmitEvent("toggle-tab-bar") },
         { key = 'q', action = wezterm.action.CloseCurrentTab { confirm = false } },
         { key = '1', action = wezterm.action.ActivateTab(0) },
         { key = '2', action = wezterm.action.ActivateTab(1) },
@@ -124,6 +129,22 @@ local SOLID_LEFT_ARROW = "█"
 -- The filled in variant of the > symbol
 local SOLID_RIGHT_ARROW = "█"
 
+local roman_numerals = {
+    [1] = "I",
+    [2] = "II",
+    [3] = "III",
+    [4] = "IV",
+    [5] = "V",
+    [6] = "VI",
+    [7] = "VII",
+    [8] = "VIII",
+    [9] = "IX",
+}
+
+local function to_roman_manual(n)
+    return roman_numerals[n] or tostring(n)
+end
+
 -- This function returns the suggested title for a tab.
 -- It prefers the title that was set via `tab:set_title()`
 -- or `wezterm cli set-tab-title`, but falls back to the
@@ -143,6 +164,13 @@ function tab_title(tab_info)
     --return tab_info.active_pane.title
 end
 
+wezterm.on("toggle-tab-bar", function(window, _)
+    show_tab_bar = not show_tab_bar
+    window:set_config_overrides({
+        enable_tab_bar = show_tab_bar,
+    })
+end)
+
 wezterm.on(
     'format-tab-title',
     function(tab, tabs, panes, config, hover, max_width)
@@ -161,7 +189,8 @@ wezterm.on(
         local edge_foreground = background
 
         local title = tab_title(tab)
-        title = string.format('%d: %s', tab.tab_index + 1, title)
+        local idx = tab.tab_index + 1
+        title = string.format('%s|%s', idx, title)
 
         -- ensure that the titles fit in the available space,
         -- and that we have room for the edges.
