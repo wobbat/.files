@@ -25,6 +25,7 @@ end
 
 alias spc="aspell -no-backup -c"
 alias cl="clear"
+alias bt="bluetui"
 alias gofmt="goimports"
 #alias xt3='exiftool -Model="RICOH GR III" -UniqueCameraModel="RICOH GR III" -T -ext dng .'
 #alias 3tx='exiftool -Model="RICOH GR IIIx" -UniqueCameraModel="RICOH GR IIIx" -T -ext dng .'
