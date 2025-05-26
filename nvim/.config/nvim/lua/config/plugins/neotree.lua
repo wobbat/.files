@@ -76,6 +76,8 @@ return {
             -- end, { desc = 'Neo-tree: Toggle Explorer' })
             --
             -- Toggle focus: jump into the tree or back to previous window
+            vim.keymap.set('n', '<C-a>', ':NeoTreeFloatToggle<CR>', { noremap = true, silent = true })
+
             vim.keymap.set('n', '<leader>v', function()
                 if vim.bo.filetype == 'neo-tree'
                     and last_win

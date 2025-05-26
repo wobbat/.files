@@ -37,6 +37,17 @@ vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: Code A
 vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float, { desc = 'LSP: Show Diagnostics' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'LSP: Prev Diagnostic' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'LSP: Next Diagnostic' })
+-- Toggle LSP diagnostics
+_G.diagnostics_visible = true
+
+vim.keymap.set("n", "<leader>tod", function()
+    _G.diagnostics_visible = not _G.diagnostics_visible
+    if _G.diagnostics_visible then
+        vim.diagnostic.show()
+    else
+        vim.diagnostic.hide()
+    end
+end, { desc = "Toggle diagnostics" })
 
 
 -- in init.lua
@@ -60,3 +71,5 @@ vim.keymap.set(
     end,
     { noremap = true, silent = true, desc = "Diagnostics → location list" }
 )
+vim.keymap.set("n", "<C-j>", "}", { desc = "Next block/paragraph" })
+vim.keymap.set("n", "<C-k>", "{", { desc = "Prev block/paragraph" })

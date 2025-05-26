@@ -22,7 +22,14 @@ return {
             },
             sections          = {
                 lualine_a = { 'mode' },
-                lualine_b = { 'branch', 'diagnostics' },
+                lualine_b = { 'branch',
+                    {
+                        'diagnostics',
+                        cond = function()
+                            return _G.diagnostics_visible
+                        end,
+                    },
+                },
                 lualine_c = { 'filename' },
                 lualine_x = { '' },
                 lualine_y = { 'diff', 'filetype' },

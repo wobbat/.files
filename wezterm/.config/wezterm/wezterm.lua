@@ -18,6 +18,15 @@ config.animation_fps = 30
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
 config.enable_wayland = true
+config.window_background_opacity = 0.99
+
+
+config.window_padding = {
+    left = '2cell',
+    right = '2cell',
+    top = '1cell',
+    bottom = '1cell',
+}
 
 -- Define colors
 local colors = {
@@ -67,16 +76,16 @@ config.keys = {
             timeout_milliseconds = 100000,
         },
     },
-    {
-        key = "j",
-        mods = "CTRL",
-        action = wezterm.action.ActivateTabRelative(1),
-    },
-    {
-        key = "k",
-        mods = "CTRL",
-        action = wezterm.action.ActivateTabRelative(-1),
-    },
+    -- {
+    --     key = "j",
+    --     mods = "CTRL",
+    --     action = wezterm.action.ActivateTabRelative(1),
+    -- },
+    -- {
+    --     key = "k",
+    --     mods = "CTRL",
+    --     action = wezterm.action.ActivateTabRelative(-1),
+    -- },
 }
 
 
